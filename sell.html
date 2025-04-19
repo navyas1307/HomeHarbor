@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sell Property | HomeHarbor</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #f8f9fa;
+            --secondary: #2d3436;
+            --accent: #e67e22;
+            --text: #2d3436;
+        }
+
+        body {
+            background-color: var(--primary);
+            color: var(--text);
+            font-family: 'Raleway', sans-serif;
+            line-height: 1.6;
+        }
+
+        /* Enhanced Header */
+        .header {
+            background: white;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Enhanced Footer */
+        .footer {
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .feature-card {
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: url("./wmremove-transformed.png");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(248, 249, 250, 0.1);
+        }
+
+        .text-box {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 2.5rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            max-width: 600px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .text-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-weight: 500;
+            font-size: 2.2rem;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-link {
+            font-size: 0.95rem;
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .primary-btn {
+            background: var(--secondary);
+            color: white;
+            padding: 0.8rem 2rem;
+            font-size: 0.95rem;
+            border-radius: 0.25rem;
+            transition: all 0.3s ease;
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            background: var(--accent);
+        }
+
+        .footer-link {
+            color: #4b5563;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+
+        .social-icon {
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.2);
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Enhanced Navigation -->
+    <nav class="fixed w-full z-50 py-4 bg-white/95 backdrop-blur-md header">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-2">
+                <div class="w-8 h-8 bg-black rounded-full flex items-center justify-center">
+                    <i class="fas fa-home text-white text-sm"></i>
+                </div>
+                <span class="text-xl font-medium">HomeHarbor</span>
+            </a>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="buy.html" class="nav-link">Buy</a>
+                <a href="sell.html" class="nav-link">Sell</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="#" class="primary-btn bg-black text-white">
+                    Sign In
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Form -->
+    <div class="container mx-auto px-6 pt-24">
+        <form id="property-form" class="bg-white rounded-xl shadow-lg p-8 max-w-4xl mx-auto">
+            <h2 class="text-2xl font-bold text-gray-800 mb-8">List Your Property</h2>
+
+            <!-- Property Details -->
+            <div class="space-y-8">
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">Property Title</label>
+                    <input type="text" name="title" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black" required>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2">Property Type</label>
+                        <select name="type" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black" required>
+                            <option value="">Select type</option>
+                            <option>House</option>
+                            <option>Apartment</option>
+                            <option>Condo</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2">Price ($)</label>
+                        <input type="number" name="price" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black" required>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2">Square Feet</label>
+                        <input type="number" name="sqft" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black" required>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">Full Address</label>
+                    <input type="text" name="address" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black" required>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2">City</label>
+                        <input type="text" name="city" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black" required>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2">State</label>
+                        <input type="text" name="state" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black" required>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2">ZIP Code</label>
+                        <input type="text" name="zip" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black" required>
+                    </div>
+                </div>
+
+                <!-- Image Upload -->
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">Property Photos</label>
+                    <div class="drop-zone rounded-xl p-12 text-center cursor-pointer mb-6">
+                        <i class="fas fa-cloud-upload-alt text-black text-4xl mb-4"></i>
+                        <h3 class="text-lg font-semibold text-gray-700">Drag & Drop Photos Here</h3>
+                        <p class="text-gray-500 mt-2">Minimum 5 photos (max 8MB each)</p>
+                        <input type="file" id="property-images" class="hidden" multiple accept="image/*">
+                    </div>
+                    <div id="image-preview" class="grid grid-cols-2 md:grid-cols-3 gap-4"></div>
+                </div>
+
+                <div class="pt-6">
+                    <button type="submit" class="primary-btn w-full">
+                        <i class="fas fa-check-circle mr-2"></i> Submit Listing
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Confirmation Section -->
+    <section id="confirmation-section" class="hidden container mx-auto px-6 pt-24">
+        <div id="confirmation-content" class="bg-white rounded-xl shadow-lg p-8 max-w-4xl mx-auto"></div>
+    </section>
+
+    <!-- Enhanced Footer -->
+    <footer class="bg-white py-12 footer">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h4 class="font-medium mb-4 text-lg text-black">HomeHarbor</h4>
+                    <p class="text-gray-600 text-sm">Premium real estate services since 2015</p>
+                </div>
+                <div>
+                    <h4 class="font-medium mb-4 text-lg text-black">Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="buy.html" class="footer-link text-sm">Property Search</a></li>
+                        <li><a href="sell.html" class="footer-link text-sm">Home Valuation</a></li>
+                        <li><a href="#" class="footer-link text-sm">Investment Advisory</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-medium mb-4 text-lg text-black">Company</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="footer-link text-sm">About Us</a></li>
+                        <li><a href="#" class="footer-link text-sm">Careers</a></li>
+                        <li><a href="#" class="footer-link text-sm">Blog</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-medium mb-4 text-lg text-black">Contact</h4>
+                    <p class="text-gray-600 text-sm">contact@homeharbor.com</p>
+                    <p class="text-gray-600 text-sm">+1 (555) 123-4567</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-600 social-icon">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 social-icon">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 social-icon">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 social-icon">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-200 mt-12 pt-8 text-center">
+                <p class="text-gray-600 text-sm">
+                    © 2023 HomeHarbor. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+
+        // Image Upload Handling
+        const dropZone = document.querySelector('.drop-zone');
+        const fileInput = document.getElementById('property-images');
+        const previewContainer = document.getElementById('image-preview');
+
+        dropZone.addEventListener('click', () => fileInput.click());
+
+        fileInput.addEventListener('change', handleFiles);
+        
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.style.backgroundColor = 'rgba(0,0,0,0.1)';
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.style.backgroundColor = 'rgba(0,0,0,0.05)';
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            handleFiles(e.dataTransfer.files);
+            dropZone.style.backgroundColor = 'rgba(0,0,0,0.05)';
+        });
+
+        function handleFiles(files) {
+            previewContainer.innerHTML = '';
+            Array.from(files).slice(0, 10).forEach(file => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const div = document.createElement('div');
+                    div.className = 'relative';
+                    div.innerHTML = `
+                        <img src="${e.target.result}" class="w-full h-48 object-cover rounded-lg border">
+                        <button class="absolute top-1 right-1 text-gray-600 bg-white rounded-full p-1 hover:bg-gray-100">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    `;
+                    previewContainer.appendChild(div);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // Form Submission
+        document.getElementById('property-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const form = document.getElementById('property-form');
+            const confirmationSection = document.getElementById('confirmation-section');
+            const confirmationContent = document.getElementById('confirmation-content');
+
+            form.classList.add('hidden');
+            confirmationSection.classList.remove('hidden');
+
+            confirmationContent.innerHTML = `
+                <div class="text-center">
+                    <i class="fas fa-check-circle text-4xl text-gray-800 mb-4"></i>
+                    <h2 class="text-2xl font-bold mb-4">Listing Submitted Successfully</h2>
+                    <p class="mb-8 text-gray-600">Your property listing is now under review</p>
+                    <a href="index.html" class="primary-btn inline-block">
+                        Return to Dashboard
+                    </a>
+                </div>
+            `;
+        });
+    </script>
+</body>
+</html>
