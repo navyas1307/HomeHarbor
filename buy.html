@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Properties - HomeHarbor</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Your existing CSS styles */
+        :root {
+            --primary: #f8f9fa;
+            --secondary: #2d3436;
+            --accent: #e67e22;
+            --text: #2d3436;
+        }
+
+        body {
+            background-color: var(--primary);
+            color: var(--text);
+            font-family: 'Raleway', sans-serif;
+            line-height: 1.6;
+        }
+
+        /* Enhanced Header */
+        .header {
+            background: white;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer {
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .feature-card {
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .property-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .property-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .property-card img {
+            border-radius: 0.5rem 0.5rem 0 0;
+        }
+
+        .nav-link {
+            font-size: 0.95rem;
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .primary-btn {
+            background: var(--secondary);
+            color: white;
+            padding: 0.8rem 2rem;
+            font-size: 0.95rem;
+            border-radius: 0.25rem;
+            transition: all 0.3s ease;
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            background: var(--accent);
+        }
+
+        .footer-link {
+            color: #4b5563;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+
+        .search-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .amenity-badge {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 2px 8px;
+            font-size: 0.85rem;
+            border-radius: 12px;
+        }
+
+        .image-carousel {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            border-radius: 0.5rem 0.5rem 0 0;
+        }
+
+        .image-carousel img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            z-index: 10;
+            padding: 0 8px;
+        }
+
+        .carousel-controls button {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+
+        .carousel-controls button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .filter-column {
+            width: 300px;
+            padding: 20px;
+            background: white;
+            border-right: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .property-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .opacity-0 { opacity: 0; }
+        .opacity-100 { opacity: 1; }
+        .transition-opacity { transition: opacity 0.3s ease-in-out; }
+        .hidden { display: none; }
+        .active { display: block; }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 py-4 bg-white/95 backdrop-blur-md header">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-2">
+                <div class="w-8 h-8 bg-black rounded-full flex items-center justify-center">
+                    <i class="fas fa-home text-white text-sm"></i>
+                </div>
+                <span class="text-xl font-medium">HomeHarbor</span>
+            </a>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="buy.html" class="nav-link">Buy</a>
+                <a href="sell.html" class="nav-link">Sell</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="cart.html" class="primary-btn bg-blue-600 hover:bg-blue-700">
+                    <i class="fas fa-shopping-cart"></i> View Cart
+                </a>
+                </a>
+                <a href="#" class="primary-btn bg-black text-white">Sign In</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto flex pt-24">
+        <!-- Filter Column -->
+        <div class="filter-column">
+            <h2 class="text-2xl font-bold text-black mb-6">Filters</h2>
+            <div class="search-card">
+                <div class="grid grid-cols-1 gap-4 mb-4">
+                    <div>
+                        <label class="block text-gray-600 mb-2 text-sm">Property Type</label>
+                        <select id="property-type" class="w-full p-2 bg-gray-100 border border-gray-300 rounded-lg text-black focus:ring-2 focus:ring-accent text-sm">
+                            <option value="">Any Type</option>
+                            <option value="house">House</option>
+                            <option value="apartment">Apartment</option>
+                            <option value="condo">Condo</option>
+                            <option value="townhouse">Townhouse</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-gray-600 mb-2 text-sm">Price Range</label>
+                        <input type="range" id="price-range" min="0" max="2000000" step="50000" 
+                               class="w-full price-range mt-2">
+                        <div id="price-display" class="text-black text-xs mt-1"></div>
+                    </div>
+                    <div>
+                        <label class="block text-gray-600 mb-2 text-sm">Bedrooms</label>
+                        <select id="bedrooms" class="w-full p-2 bg-gray-100 border border-gray-300 rounded-lg text-black focus:ring-2 focus:ring-accent text-sm">
+                            <option value="">Any</option>
+                            <option>1+</option>
+                            <option>2+</option>
+                            <option>3+</option>
+                            <option>4+</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-gray-600 mb-2 text-sm">Bathrooms</label>
+                        <select id="bathrooms" class="w-full p-2 bg-gray-100 border border-gray-300 rounded-lg text-black focus:ring-2 focus:ring-accent text-sm">
+                            <option value="">Any</option>
+                            <option>1+</option>
+                            <option>2+</option>
+                            <option>3+</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-gray-600 mb-2 text-sm">Min Sqft</label>
+                        <input type="number" id="sqft" placeholder="Enter sqft" 
+                               class="w-full p-2 bg-gray-100 border border-gray-300 rounded-lg text-black focus:ring-2 focus:ring-accent text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-gray-600 mb-2 text-sm">Amenities</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <label class="flex items-center space-x-1">
+                                <input type="checkbox" class="form-checkbox text-accent" value="parking">
+                                <span class="text-gray-600 text-sm">Parking</span>
+                            </label>
+                            <label class="flex items-center space-x-1">
+                                <input type="checkbox" class="form-checkbox text-accent" value="pool">
+                                <span class="text-gray-600 text-sm">Pool</span>
+                            </label>
+                            <label class="flex items-center space-x-1">
+                                <input type="checkbox" class="form-checkbox text-accent" value="gym">
+                                <span class="text-gray-600 text-sm">Gym</span>
+                            </label>
+                            <label class="flex items-center space-x-1">
+                                <input type="checkbox" class="form-checkbox text-accent" value="ac">
+                                <span class="text-gray-600 text-sm">AC</span>
+                            </label>
+                            <label class="flex items-center space-x-1">
+                                <input type="checkbox" class="form-checkbox text-accent" value="fireplace">
+                                <span class="text-gray-600 text-sm">Fireplace</span>
+                            </label>
+                            <label class="flex items-center space-x-1">
+                                <input type="checkbox" class="form-checkbox text-accent" value="garden">
+                                <span class="text-gray-600 text-sm">Garden</span>
+                            </label>
+                            <label class="flex items-center space-x-1">
+                                <input type="checkbox" class="form-checkbox text-accent" value="dock">
+                                <span class="text-gray-600 text-sm">Dock</span>
+                            </label>
+                            <label class="flex items-center space-x-1">
+                                <input type="checkbox" class="form-checkbox text-accent" value="patio">
+                                <span class="text-gray-600 text-sm">Patio</span>
+                            </label>
+                            <label class="flex items-center space-x-1">
+                                <input type="checkbox" class="form-checkbox text-accent" value="concierge">
+                                <span class="text-gray-600 text-sm">Concierge</span>
+                            </label>
+                            <label class="flex items-center space-x-1">
+                                <input type="checkbox" class="form-checkbox text-accent" value="rooftop">
+                                <span class="text-gray-600 text-sm">Rooftop</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <button id="search-button" 
+                        class="w-full bg-black text-white font-medium py-2 rounded-lg text-sm transition-all hover:bg-accent">
+                    Search Properties
+                </button>
+            </div>
+        </div>
+
+        <!-- Property Listings -->
+        <div class="main-content">
+            <div id="properties-container" class="property-grid"></div>
+            <div class="navigation-buttons mt-8 flex justify-center gap-4">
+                <button id="prev-button" class="primary-btn"><i class="fas fa-chevron-left"></i> Previous</button>
+                <button id="next-button" class="primary-btn">Next <i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({ once: true, duration: 600, easing: 'ease-out-quad', offset: 80 });
+
+        let properties = [
+        {
+            id: 1,
+            title: "Modern Downtown Villa",
+            price: 450000,
+            bedrooms: 2,
+            bathrooms: 2,
+            sqft: 1200,
+            type: "apartment",
+            transaction: "sale",
+            images: [
+                "./34.jpg",
+                "./2.jpg",
+                "./3.jpg",
+                "./4.jpg",
+                "./5.jpg",
+            ],
+            amenities: ["parking", "ac", "gym", "concierge"]
+        },
+        {
+            id: 2,
+            title: "Luxury Beachfront Villa",
+            price: 2200000,
+            bedrooms: 5,
+            bathrooms: 4,
+            sqft: 4500,
+            type: "house",
+            transaction: "sale",
+            images: [
+                "./6.jpg",
+                "./7.jpg",
+                "./8.jpg",
+                "./9.jpg",
+                "./10.jpg",
+            ],
+            amenities: ["pool", "gym", "garden", "dock"]
+        },
+        {
+            id: 3,
+            title: "Urban Chic Condo",
+            price: 750000,
+            bedrooms: 2,
+            bathrooms: 2,
+            sqft: 1500,
+            type: "condo",
+            transaction: "sale",
+            images: [
+                "./11.jpg",
+                "./12.jpg",
+                "./13.jpg",
+                "./2.jpg",
+                "./14.jpg",
+            ],
+            amenities: ["parking", "rooftop", "gym", "ac"]
+        },
+        {
+            id: 4,
+            title: "Suburban Family Home",
+            price: 950000,
+            bedrooms: 4,
+            bathrooms: 3,
+            sqft: 2800,
+            type: "house",
+            transaction: "sale",
+            images: [
+                "./16.jpg",
+                "./17.jpg",
+                "./13.jpg",
+                "./2.jpg",
+                "./18.jpg",
+            ],
+            amenities: ["pool", "garden", "fireplace", "patio"]
+        },
+        {
+            id: 5,
+            title: "Downtown Penthouse",
+            price: 3500000,
+            bedrooms: 3,
+            bathrooms: 3,
+            sqft: 3200,
+            type: "apartment",
+            transaction: "sale",
+            images: [
+                "./19.jpg",
+                "./20.jpg",
+                "./21.jpg",
+                "./22.jpg",
+                "./23.jpg",
+            ],
+            amenities: ["gym", "concierge", "rooftop", "ac"]
+        },
+        {
+            id: 6,
+            title: "Mountain Retreat",
+            price: 650000,
+            bedrooms: 3,
+            bathrooms: 2,
+            sqft: 1800,
+            type: "house",
+            transaction: "sale",
+            images: [
+                "./24.jpg",
+                "./17.jpg",
+                "./2.jpg",
+                "./19.jpg",
+                "./23.jpg",
+            ],
+            amenities: ["fireplace", "garden", "patio"]
+        },
+        {
+            id: 7,
+            title: "Lakefront Cottage",
+            price: 850000,
+            bedrooms: 2,
+            bathrooms: 1,
+            sqft: 1400,
+            type: "house",
+            transaction: "sale",
+            images: [
+                "./25.jpg",
+                "./17.jpg",
+                "./2.jpg",
+                "./5.jpg",
+                "./8.jpg",
+            ],
+            amenities: ["dock", "fireplace", "garden"]
+        },
+        {
+            id: 8,
+            title: "City Loft",
+            price: 620000,
+            bedrooms: 1,
+            bathrooms: 1,
+            sqft: 900,
+            type: "apartment",
+            transaction: "sale",
+            images: [
+                "./26.jpg",
+                "./27.jpg",
+                "./28.jpg",
+                "./29.jpg",
+                "./30.jpg",
+            ],
+            amenities: ["parking", "ac"]
+        },
+        {
+            id: 9,
+            title: "Historic Townhouse",
+            price: 1250000,
+            bedrooms: 4,
+            bathrooms: 3.5,
+            sqft: 2600,
+            type: "townhouse",
+            transaction: "sale",
+            images: [
+                "./31.jpg",
+                "./2.jpg",
+                "./21.jpg",
+                "./22.jpg",
+                "./30.jpg",
+            ],
+            amenities: ["garden", "fireplace", "patio"]
+        },
+        {
+            id: 10,
+            title: "Desert Oasis",
+            price: 890000,
+            bedrooms: 3,
+            bathrooms: 2,
+            sqft: 2100,
+            type: "house",
+            transaction: "sale",
+            images: [
+                "./32.jpg",
+                "./33.jpg",
+                "./5.jpg",
+                "./22.jpg",
+                "./30.jpg",
+            ],
+            amenities: ["pool", "patio", "garden"]
+        }
+        ];
+
+        const formatter = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+            maximumFractionDigits: 0
+        });
+
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Update cart count in the navigation
+        function updateCartCount() {
+            const cartCount = document.getElementById('cart-count');
+            cartCount.textContent = cart.length;
+        }
+
+        // Add property to cart
+        function addToCart(propertyId) {
+            const property = properties.find(p => p.id === propertyId);
+            if (property && !cart.some(item => item.id === propertyId)) {
+                cart.push(property);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartCount();
+                alert(`${property.title} added to cart!`);
+            }
+        }
+
+        // Buy Now functionality
+        function buyNow(propertyId) {
+            const property = properties.find(p => p.id === propertyId);
+            if (property) {
+                alert(`You have successfully purchased ${property.title} for ${formatter.format(property.price)}!`);
+            }
+        }
+
+        // Render properties
+        function renderProperties(propertiesArray) {
+            const container = document.getElementById('properties-container');
+            container.innerHTML = propertiesArray.map(property => `
+                <div class="property-card p-4 rounded-lg" data-aos="fade-up" data-id="${property.id}">
+                    <div class="image-carousel">
+                        ${property.images.map((image, index) => `
+                            <img src="${image}" alt="${property.title} ${index + 1}" 
+                                class="${index === 0 ? 'active opacity-100' : 'hidden opacity-0'} 
+                                transition-opacity">
+                        `).join('')}
+                        <div class="carousel-controls">
+                            <button class="prev-btn" data-id="${property.id}">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="next-btn" data-id="${property.id}">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-semibold mt-4">${property.title}</h3>
+                    <p class="text-black font-medium">${formatter.format(property.price)}</p>
+                    <div class="details text-sm text-gray-600 mt-2">
+                        <span><i class="fas fa-bed mr-1"></i>${property.bedrooms} Bed</span>
+                        <span class="mx-2">|</span>
+                        <span><i class="fas fa-bath mr-1"></i>${property.bathrooms} Bath</span>
+                        <span class="mx-2">|</span>
+                        <span><i class="fas fa-ruler-combined mr-1"></i>${property.sqft} sqft</span>
+                    </div>
+                    <div class="amenities flex flex-wrap mt-3">
+                        ${property.amenities.map(amenity => `
+                            <span class="amenity-badge rounded-full text-xs mr-2 mb-2">
+                                ${amenity}
+                            </span>
+                        `).join('')}
+                    </div>
+                    <div class="mt-4 flex gap-2">
+                        <button onclick="addToCart(${property.id})" class="primary-btn bg-green-600 hover:bg-green-700">
+                            Add to Cart
+                        </button>
+                        <button onclick="buyNow(${property.id})" class="primary-btn bg-blue-600 hover:bg-blue-700">
+                            Buy Now
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Event listeners for carousel and pagination
+        document.addEventListener('click', function(e) {
+            const target = e.target.closest('button');
+            if (!target) return;
+
+            // Handle carousel controls
+            if (target.classList.contains('prev-btn') || target.classList.contains('next-btn')) {
+                const propertyId = target.closest('[data-id]')?.dataset.id;
+                if (!propertyId) return;
+
+                const property = document.querySelector(`.property-card[data-id="${propertyId}"]`);
+                if (!property) return;
+
+                const images = property.querySelectorAll('.image-carousel img');
+                let activeIndex = Array.from(images).findIndex(img => img.classList.contains('active'));
+
+                if (target.classList.contains('prev-btn')) {
+                    images[activeIndex].classList.remove('active', 'opacity-100');
+                    images[activeIndex].classList.add('hidden', 'opacity-0');
+                    activeIndex = (activeIndex - 1 + images.length) % images.length;
+                } else {
+                    images[activeIndex].classList.remove('active', 'opacity-100');
+                    images[activeIndex].classList.add('hidden', 'opacity-0');
+                    activeIndex = (activeIndex + 1) % images.length;
+                }
+
+                images[activeIndex].classList.remove('hidden', 'opacity-0');
+                images[activeIndex].classList.add('active', 'opacity-100');
+            }
+
+            // Handle pagination buttons
+            if (target.id === 'prev-button' || target.id === 'next-button') {
+                if (target.id === 'prev-button' && currentPage > 0) {
+                    currentPage--;
+                } else if (target.id === 'next-button' && (currentPage + 1) * propertiesPerPage < properties.length) {
+                    currentPage++;
+                }
+                showPage(currentPage);
+            }
+        });
+
+        // Filter functionality
+        document.getElementById('search-button').addEventListener('click', () => {
+            const filters = {
+                type: document.getElementById('property-type').value,
+                price: document.getElementById('price-range').value,
+                bedrooms: document.getElementById('bedrooms').value,
+                bathrooms: document.getElementById('bathrooms').value,
+                sqft: document.getElementById('sqft').value,
+                amenities: Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
+                             .map(checkbox => checkbox.value)
+            };
+
+            const filtered = properties.filter(property => {
+                return Object.entries(filters).every(([key, value]) => {
+                    if (!value) return true;
+                    if (key === 'amenities') return value.every(v => property.amenities.includes(v));
+                    if (key === 'price') return property.price <= value;
+                    if (key === 'bedrooms' || key === 'bathrooms') return property[key] >= parseInt(value);
+                    if (key === 'sqft') return property.sqft >= parseInt(value);
+                    return property[key].toString().toLowerCase().includes(value);
+                });
+            });
+
+            renderProperties(filtered);
+        });
+
+        // Pagination
+        let currentPage = 0;
+        const propertiesPerPage = 6;
+
+        function showPage(page) {
+            const start = page * propertiesPerPage;
+            const end = start + propertiesPerPage;
+            const paginatedProperties = properties.slice(start, end);
+            renderProperties(paginatedProperties);
+        }
+
+        // Initial render
+        showPage(currentPage);
+        updateCartCount();
+    </script>
+</body>
+</html>
