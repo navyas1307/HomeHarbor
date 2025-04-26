@@ -7,11 +7,11 @@ Welcome to this **responsive e-commerce web project** – a clean, minimal onlin
 
 ##  Features
 
-- ✨ Clean, responsive layout
-- 🛒 Cart integration with product count
-- 🛍️ Buy & Sell product pages
-- 📦 Organized structure (index, cart, buy, sell)
-- 🎨 Custom modern design
+-  Clean, responsive layout
+-  Cart integration with product count
+-  Buy & Sell product pages
+-  Organized structure (index, cart, buy, sell)
+-  Custom modern design
 
 ##  Pages Overview
 
